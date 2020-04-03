@@ -57,6 +57,7 @@
   /* height: fit-content; */
   padding: 6px;
   outline: none;
+  font-family: inherit;
 }
 .new-reply-button {
   margin-left: 2px;

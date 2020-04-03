@@ -39,6 +39,11 @@
   margin-bottom: 2px;
   color: rgb(138, 138, 138);
 }
+
+.clear-icon {
+  cursor: pointer;
+}
+
 .new-reply-form {
   width: 100%;
 }

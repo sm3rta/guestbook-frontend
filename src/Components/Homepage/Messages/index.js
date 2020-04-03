@@ -48,40 +48,57 @@ const Messages = (props) => {
     getMessages();
   }, [getMessages]);
 
-  const submitReply = (messageIdx) => {
-    const message = messages[messageIdx];
-    const replyContent = replyValues[messageIdx].value;
-    console.log("message", message);
-    console.log("replyContent", replyContent);
-    setReplyValues({
-      ...replyValues,
-      [messageIdx]: {
-        value: replyContent,
-        loading: true,
-      },
-    });
-
-    axios
-      .post(apiEndpoint + "replies", {
-        content: replyContent,
-        submittedBy: userData._id,
-        messageId: message._id,
-      })
-      .then((res) => {
-        console.log("post reply res", res);
-        setReplyValues({
-          ...replyValues,
-          [messageIdx]: {
-            value: "",
-            loading: false,
-          },
-        });
-        getMessages(false);
-      })
-      .catch((error) => {
-        console.log("post reply error", error);
+  const submitReply = useCallback(
+    (messageIdx) => {
+      const message = messages[messageIdx];
+      const replyContent = replyValues[messageIdx].value;
+      console.log("message", message);
+      console.log("replyContent", replyContent);
+      setReplyValues({
+        ...replyValues,
+        [messageIdx]: {
+          value: replyContent,
+          loading: true,
+        },
       });
-  };
+
+      axios
+        .post(apiEndpoint + "replies", {
+          content: replyContent,
+          submittedBy: userData._id,
+          messageId: message._id,
+        })
+        .then((res) => {
+          console.log("post reply res", res);
+          setReplyValues({
+            ...replyValues,
+            [messageIdx]: {
+              value: "",
+              loading: false,
+            },
+          });
+          getMessages(false);
+        })
+        .catch((error) => {
+          console.log("post reply error", error);
+        });
+    },
+    [getMessages, messages, replyValues, userData._id]
+  );
+
+  const deleteMessage = useCallback(
+    (messageId) => {
+      setLoading(true);
+      axios
+        .delete(apiEndpoint + `messages/${messageId}`)
+        .then((res) => {
+          getMessages();
+        })
+        .catch()
+        .finally(() => {});
+    },
+    [getMessages]
+  );
 
   return (
     <div className="root">
@@ -90,16 +107,29 @@ const Messages = (props) => {
           // finished loading and fetched data successfully
           messages.length > 0 ? (
             // there are messages
-            <div className="messagesContainer">
+            <div className="messages-container">
               {messages.map((message, messageIdx) => (
-                <div key={messageIdx} className="message">
-                  <p className="message-submitter">
-                    {message.submittedBy.name}
-                  </p>
-                  <p className="message-content">{message.content}</p>
-                  <p className="message-date">
-                    {moment(message.date).fromNow()}
-                  </p>
+                <div key={messageIdx} className="message-container">
+                  <div className="message-info-container">
+                    <div>
+                      <p className="message-submitter">
+                        {message.submittedBy.name}
+                      </p>
+                      <p className="message-content">{message.content}</p>
+                      <p className="message-date">
+                        {moment(message.date).fromNow()}
+                      </p>
+                    </div>
+
+                    {message.submittedBy._id === userData._id && loggedIn && (
+                      <i
+                        onClick={() => deleteMessage(message._id)}
+                        className="material-icons clear-icon"
+                      >
+                        clear
+                      </i>
+                    )}
+                  </div>
                   <div className="new-reply-container">
                     <form
                       className="new-reply-form"
@@ -110,9 +140,13 @@ const Messages = (props) => {
                     >
                       <input
                         className="new-reply-input"
-                        placeholder="Write a reply..."
+                        placeholder={
+                          loggedIn
+                            ? "Write a reply..."
+                            : "Please login to reply"
+                        }
                         value={replyValues[messageIdx].value}
-                        disabled={replyValues[messageIdx].loading}
+                        disabled={replyValues[messageIdx].loading || !loggedIn}
                         onChange={(event) => {
                           setReplyValues({
                             ...replyValues,

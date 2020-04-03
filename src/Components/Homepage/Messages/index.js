@@ -3,7 +3,7 @@ import axios from "axios";
 import "./index.css";
 import CircularLoading from "../../../common/CircularLoading";
 import moment from "moment";
-console.log("moment", moment);
+import { useLocation } from "react-router-dom";
 
 const apiEndpoint = process.env.REACT_APP_API_ENDPOINT;
 console.log("process.env", process.env);
@@ -14,10 +14,7 @@ const Messages = (props) => {
   const [messages, setMessages] = useState([]);
   const [replyValues, setReplyValues] = useState({});
 
-  useEffect(() => {
-    console.log("replyValues", replyValues);
-  }, [replyValues]);
-
+  const location = useLocation();
   const { loggedIn, userData } = props;
 
   const getMessages = useCallback((loading = true) => {
@@ -31,8 +28,8 @@ const Messages = (props) => {
         res.data.data.messages.forEach((_message, messageIdx) => {
           replyValues[messageIdx] = { value: "", loading: false };
         });
-        setReplyValues(replyValues);
         setMessages(res.data.data.messages);
+        setReplyValues(replyValues);
         setError(false);
       })
       .catch((error) => {
@@ -43,6 +40,10 @@ const Messages = (props) => {
         setLoading(false);
       });
   }, []);
+
+  useEffect(() => {
+    location.search === "?refresh=true" && getMessages();
+  }, [location, getMessages]);
 
   useEffect(() => {
     getMessages();
@@ -94,7 +95,9 @@ const Messages = (props) => {
         .then((res) => {
           getMessages();
         })
-        .catch()
+        .catch(() => {
+          setLoading(false);
+        })
         .finally(() => {});
     },
     [getMessages]

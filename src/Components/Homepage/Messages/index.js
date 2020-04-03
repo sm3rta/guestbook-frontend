@@ -189,7 +189,7 @@ const Messages = (props) => {
           // finished loading data but an error occurred
           <div className="error-message-container">
             <p>An error occurred while loading messages, please try again</p>
-            <button onClick={getMessages}></button>
+            <button onClick={getMessages}>Reload</button>
           </div>
         )
       ) : (

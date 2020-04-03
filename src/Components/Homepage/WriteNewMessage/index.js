@@ -3,9 +3,9 @@ import "./index.css";
 
 const WriteNewMessage = (props) => {
   const [messageContent, setMessageContent] = useState("");
-  const { loggedIn } = props;
+  const { loggedIn, userData } = props;
 
-  return loggedIn ? (
+  return (
     <div className="write-new-message">
       <textarea
         value={messageContent}
@@ -13,13 +13,17 @@ const WriteNewMessage = (props) => {
         className="new-message-textarea"
         rows={5}
         cols={20}
+        placeholder={
+          loggedIn ? "Write a message" : "You must log in to post messages"
+        }
+        disabled={!loggedIn}
       />
-      <div className="button-container">
-        <button className="post-message-button">Post Message</button>
-      </div>
+      {loggedIn && (
+        <div className="button-container">
+          <button className="post-message-button">Post Message</button>
+        </div>
+      )}
     </div>
-  ) : (
-    <p>You must be logged in to be able to post messages </p>
   );
 };
 export default WriteNewMessage;

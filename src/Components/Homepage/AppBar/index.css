@@ -2,6 +2,7 @@
   height: 50px;
   box-shadow: 0px 0px 3px -1px darkgrey;
   display: flex;
+  width: 100%;
   /* padding: 4px; */
 }
 
@@ -50,23 +51,6 @@
 
 .drop-down-button {
   width: 100%;
-  border: none;
-  background-color: white;
-  cursor: pointer;
-  min-height: 30px;
-}
-.drop-down-button:hover {
-  background-color: whitesmoke;
-}
-
-.sign-in-button {
-  border: none;
-  background-color: white;
-  cursor: pointer;
-  min-height: 30px;
-}
-.sign-in-button:hover {
-  background-color: whitesmoke;
 }
 
 @media (max-width: 600px) {

@@ -1,0 +1,19 @@
+.write-new-message {
+  width: 100%;
+}
+
+.new-message-textarea {
+  outline: none;
+  resize: none;
+  width: 100%;
+  border: 1px solid whitesmoke;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.post-message-button {
+  background-color: white;
+}

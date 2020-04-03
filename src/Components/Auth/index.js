@@ -9,7 +9,11 @@ import "./index.css";
 const Auth = (props) => {
   const { loggedIn, setLoggedIn, setUserData } = props;
   return loggedIn ? (
-    <RedirectToHomepage />
+    <div className="auth-root">
+      <div className="auth-container">
+        <RedirectToHomepage />
+      </div>
+    </div>
   ) : (
     <div className="auth-root">
       <p className="text">Welcome to the guestbook</p>

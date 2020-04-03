@@ -4,36 +4,45 @@ import { Switch, Route } from "react-router-dom";
 import Signup from "./Signup";
 import Signin from "./Signin";
 import RedirectToHomepage from "./RedirectToHomepage";
+import "./index.css";
 
 const Auth = (props) => {
   const { loggedIn, setLoggedIn, setUserData } = props;
   return loggedIn ? (
     <RedirectToHomepage />
   ) : (
-    <Switch>
-      <Route
-        path="/auth/sign-in"
-        render={(props) => (
-          <Signin
-            {...props}
-            setLoggedIn={setLoggedIn}
-            setUserData={setUserData}
-          />
-        )}
-        exact
-      />
-      <Route
-        path="/auth/sign-up"
-        render={(props) => (
-          <Signup
-            {...props}
-            setLoggedIn={setLoggedIn}
-            setUserData={setUserData}
-          />
-        )}
-        exact
-      />
-    </Switch>
+    <div className="auth-root">
+      <p className="text">Welcome to the guestbook</p>
+      <p className="text small">Please sign in or sign up</p>
+      <div className="auth-container">
+        <div className="form-container">
+          <Switch>
+            <Route
+              path="/auth/sign-in"
+              render={(props) => (
+                <Signin
+                  {...props}
+                  setLoggedIn={setLoggedIn}
+                  setUserData={setUserData}
+                />
+              )}
+              exact
+            />
+            <Route
+              path="/auth/sign-up"
+              render={(props) => (
+                <Signup
+                  {...props}
+                  setLoggedIn={setLoggedIn}
+                  setUserData={setUserData}
+                />
+              )}
+              exact
+            />
+          </Switch>
+        </div>
+      </div>
+    </div>
   );
 };
 export default Auth;

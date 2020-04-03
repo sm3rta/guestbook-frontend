@@ -13,12 +13,24 @@ const Auth = (props) => {
     <Switch>
       <Route
         path="/auth/sign-in"
-        render={(props) => <Signin {...props} setLoggedIn={setLoggedIn} />}
+        render={(props) => (
+          <Signin
+            {...props}
+            setLoggedIn={setLoggedIn}
+            setUserData={setUserData}
+          />
+        )}
         exact
       />
       <Route
         path="/auth/sign-up"
-        render={(props) => <Signup {...props} setLoggedIn={setLoggedIn} />}
+        render={(props) => (
+          <Signup
+            {...props}
+            setLoggedIn={setLoggedIn}
+            setUserData={setUserData}
+          />
+        )}
         exact
       />
     </Switch>

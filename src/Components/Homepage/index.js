@@ -15,8 +15,8 @@ const Homepage = (props) => {
         setLoggedIn={setLoggedIn}
       />
       <div className="container">
-        <WriteNewMessage loggedIn={loggedIn} />
-        <Messages loggedIn={loggedIn} />
+        <WriteNewMessage loggedIn={loggedIn} userData={userData} />
+        <Messages loggedIn={loggedIn} userData={userData} />
       </div>
     </main>
   );

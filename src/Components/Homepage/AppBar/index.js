@@ -12,9 +12,9 @@ const AppBar = (props) => {
       </div>
       <div className="account-container">
         {loggedIn ? (
-          <div class="dropdown">
+          <div className="dropdown">
             <span>{userData.name}</span>
-            <div class="dropdown-content">
+            <div className="dropdown-content">
               <button
                 className="drop-down-button"
                 onClick={() => {

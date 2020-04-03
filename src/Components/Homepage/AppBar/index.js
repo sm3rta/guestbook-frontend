@@ -26,7 +26,7 @@ const AppBar = (props) => {
             </div>
           </div>
         ) : (
-          <Link to="/sign-in">
+          <Link to="/auth/sign-in">
             <button className="sign-in-button">Sign in</button>
           </Link>
         )}

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Homepage from "./Components/Homepage";
+import Auth from "./Components/Auth";
 
 const AppRouter = () => {
   const [loggedIn, setLoggedIn] = useState(true);
@@ -21,8 +22,17 @@ const AppRouter = () => {
           )}
           exact
         />
-        {/* <Route path="/sign-in" component={"div"} exact />
-        <Route path="/sign-up" component={"div"} exact /> */}
+        <Route
+          path="/auth"
+          render={(props) => (
+            <Auth
+              {...props}
+              loggedIn={loggedIn}
+              setLoggedIn={setLoggedIn}
+              setUserData={setUserData}
+            />
+          )}
+        />
       </Switch>
     </Router>
   );

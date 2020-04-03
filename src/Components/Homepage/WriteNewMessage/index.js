@@ -10,7 +10,6 @@ const WriteNewMessage = (props) => {
       <textarea
         value={messageContent}
         onChange={(event) => setMessageContent(event.target.value)}
-        wrap="off"
         className="new-message-textarea"
         rows={5}
         cols={20}

@@ -5,7 +5,11 @@ import Auth from "./Components/Auth";
 
 const AppRouter = () => {
   const [loggedIn, setLoggedIn] = useState(true);
-  const [userData, setUserData] = useState({ name: "Ahmed Habeila" });
+  const [userData, setUserData] = useState({
+    _id: "5e87797964ea8674b8a81573",
+    name: "hodhod",
+    email: "asaaaaaaaaaaadf@asd.com",
+  });
 
   return (
     <Router>

@@ -1,0 +1,40 @@
+.auth-root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.text {
+  margin: 4px 0;
+}
+
+.small {
+  font-size: small;
+}
+
+.auth-container {
+  margin-top: 12px;
+  padding: 4px;
+  width: 67%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.form-container {
+  box-shadow: 0px 0px 8px -4px #00b7ff87;
+  max-width: 300px;
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .auth-container {
+    width: 83%;
+  }
+}
+
+@media (max-width: 600px) {
+  .auth-container {
+    width: 100%;
+  }
+}

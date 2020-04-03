@@ -1,6 +1,6 @@
 import React from "react";
-import { Router, Switch, Route } from "react-router-dom";
-import AppBar from "./AppBar";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import AppBar from "./Components/AppBar";
 
 const AppRouter = () => {
   return (

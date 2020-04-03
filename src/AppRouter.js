@@ -1,20 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import AppBar from "./Components/AppBar";
+import Homepage from "./Components/Homepage";
 
 const AppRouter = () => {
+  const [loggedIn, setLoggedIn] = useState(true);
+  const [userData, setUserData] = useState({ name: "Ahmed Habeila" });
+
   return (
     <Router>
-      <div>
-        <AppBar />
-      </div>
-      <div>
-        <Switch>
-          {/* <Route path="/" component={Homepage} exact />
-          <Route path="/signin" component={Homepage} exact />
-          <Route path="/signup" component={Homepage} exact /> */}
-        </Switch>
-      </div>
+      <Switch>
+        <Route
+          path="/"
+          render={(props) => (
+            <Homepage
+              {...props}
+              loggedIn={loggedIn}
+              setLoggedIn={setLoggedIn}
+              userData={userData}
+            />
+          )}
+          exact
+        />
+        {/* <Route path="/sign-in" component={"div"} exact />
+        <Route path="/sign-up" component={"div"} exact /> */}
+      </Switch>
     </Router>
   );
 };

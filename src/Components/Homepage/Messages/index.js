@@ -180,7 +180,7 @@ const Messages = (props) => {
             </div>
           ) : (
             // there are no messages
-            <div>
+            <div className="error-message-container">
               <p>There are no messages</p>
               <p>Be the first to submit a message!</p>
             </div>

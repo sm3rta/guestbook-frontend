@@ -17,6 +17,19 @@ button:hover {
 button:focus {
   outline: none;
 }
+input {
+  height: 100%;
+  width: 100%;
+  resize: none;
+  border: 1px solid whitesmoke;
+  margin: 4px 0;
+  /* min-width: 200px; */
+  /* margin-right: 2px; */
+  /* height: fit-content; */
+  padding: 6px;
+  outline: none;
+  font-family: inherit;
+}
 
 body {
   margin: 0;

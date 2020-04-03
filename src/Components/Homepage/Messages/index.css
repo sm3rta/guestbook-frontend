@@ -48,17 +48,6 @@
   width: 100%;
 }
 
-.new-reply-input {
-  height: 100%;
-  width: 100%;
-  resize: none;
-  border: 1px solid whitesmoke;
-  /* margin-right: 2px; */
-  /* height: fit-content; */
-  padding: 6px;
-  outline: none;
-  font-family: inherit;
-}
 .new-reply-button {
   margin-left: 2px;
   min-width: 60px;

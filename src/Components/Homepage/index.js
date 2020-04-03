@@ -1,5 +1,8 @@
 import React from "react";
+
 import AppBar from "./AppBar";
+import WriteNewMessage from "./WriteNewMessage";
+import Messages from "./Messages";
 
 const Homepage = (props) => {
   const { loggedIn, setLoggedIn, userData } = props;
@@ -10,6 +13,8 @@ const Homepage = (props) => {
         userData={userData}
         setLoggedIn={setLoggedIn}
       />
+      <WriteNewMessage loggedIn={loggedIn} />
+      <Messages loggedIn={loggedIn} />
     </div>
   );
 };

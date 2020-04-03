@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
-import moment from "moment";
+import "./index.css";
 import CircularLoading from "../../../common/CircularLoading";
+import moment from "moment";
+console.log("moment", moment);
 
 const apiEndpoint = process.env.REACT_APP_API_ENDPOINT;
 console.log("process.env", process.env);
@@ -12,18 +14,29 @@ const Messages = (props) => {
   const [messages, setMessages] = useState([]);
   const [replyValues, setReplyValues] = useState({});
 
-  const getMessages = useCallback(() => {
+  useEffect(() => {
+    console.log("replyValues", replyValues);
+  }, [replyValues]);
+
+  const { loggedIn, userData } = props;
+
+  const getMessages = useCallback((loading = true) => {
     setError(false);
-    setLoading(true);
+    loading && setLoading(true);
     axios
       .get(apiEndpoint + "messages")
       .then((res) => {
-        console.log("get messages res", res);
+        console.log("res", res);
+        const replyValues = {};
+        res.data.data.messages.forEach((_message, messageIdx) => {
+          replyValues[messageIdx] = { value: "", loading: false };
+        });
+        setReplyValues(replyValues);
         setMessages(res.data.data.messages);
         setError(false);
       })
       .catch((error) => {
-        console.log("get messages error", error);
+        console.log("error", error);
         setError(true);
       })
       .finally(() => {
@@ -34,6 +47,41 @@ const Messages = (props) => {
   useEffect(() => {
     getMessages();
   }, [getMessages]);
+
+  const submitReply = (messageIdx) => {
+    const message = messages[messageIdx];
+    const replyContent = replyValues[messageIdx].value;
+    console.log("message", message);
+    console.log("replyContent", replyContent);
+    setReplyValues({
+      ...replyValues,
+      [messageIdx]: {
+        value: replyContent,
+        loading: true,
+      },
+    });
+
+    axios
+      .post(apiEndpoint + "replies", {
+        content: replyContent,
+        submittedBy: userData._id,
+        messageId: message._id,
+      })
+      .then((res) => {
+        console.log("post reply res", res);
+        setReplyValues({
+          ...replyValues,
+          [messageIdx]: {
+            value: "",
+            loading: false,
+          },
+        });
+        getMessages(false);
+      })
+      .catch((error) => {
+        console.log("post reply error", error);
+      });
+  };
 
   return (
     <div className="root">
@@ -57,7 +105,7 @@ const Messages = (props) => {
                       className="new-reply-form"
                       onSubmit={(event) => {
                         event.preventDefault();
-                        // submitReply(messageIdx);
+                        submitReply(messageIdx);
                       }}
                     >
                       <input

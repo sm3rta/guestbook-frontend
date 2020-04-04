@@ -12,19 +12,18 @@ const AppBar = (props) => {
       </div>
       <div className="account-container">
         {loggedIn ? (
-          <div className="dropdown">
+          <>
             <span>{userData.name}</span>
-            <div className="dropdown-content">
-              <button
-                className="drop-down-button"
-                onClick={() => {
-                  setLoggedIn(false);
-                }}
-              >
-                Log out
-              </button>
-            </div>
-          </div>
+
+            <i
+              onClick={() => {
+                setLoggedIn(false);
+              }}
+              className="material-icons clear-icon"
+            >
+              exit_to_app
+            </i>
+          </>
         ) : (
           <Link to="/auth/sign-in">
             <button className="sign-in-button">Sign in</button>

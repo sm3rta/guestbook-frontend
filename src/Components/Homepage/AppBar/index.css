@@ -30,25 +30,6 @@
   flex-basis: 40%;
 }
 
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: white;
-  min-width: 60px;
-  box-shadow: 0px 0px 3px -1px darkgrey;
-  /* padding: 12px 16px; */
-  z-index: 1;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
 .drop-down-button {
   width: 100%;
 }

@@ -4,12 +4,12 @@ import Homepage from "./Components/Homepage";
 import Auth from "./Components/Auth";
 
 const AppRouter = () => {
-  const [loggedIn, setLoggedIn] = useState(true);
-  const [userData, setUserData] = useState({
-    _id: "5e87797964ea8674b8a81573",
-    name: "hodhod",
-    email: "asaaaaaaaaaaadf@asd.com",
-  });
+  const [loggedIn, setLoggedIn] = useState(
+    JSON.parse(localStorage.getItem("loggedIn")) || false
+  );
+  const [userData, setUserData] = useState(
+    JSON.parse(localStorage.getItem("userData")) || {}
+  );
 
   return (
     <Router>

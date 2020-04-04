@@ -38,6 +38,8 @@ const Signin = (props) => {
           console.log("signin post res", res);
           setUserData(res.data.data);
           setLoggedIn(true);
+          localStorage.setItem("loggedIn", JSON.stringify(true));
+          localStorage.setItem("userData", JSON.stringify(res.data.data));
           history.push("/");
         })
         .catch((err) => {

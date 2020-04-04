@@ -1,10 +1,32 @@
+/**
+ * @module Auth
+ */
 import React from "react";
 import { Switch, Route } from "react-router-dom";
+import "./index.css";
+import PropTypes from "prop-types";
 
 import Signup from "./Signup";
 import Signin from "./Signin";
 import RedirectToHomepage from "./RedirectToHomepage";
-import "./index.css";
+
+/**
+ * @method
+ * @desc this is a nested router, it redirects to the appropriate component page
+ * (signin or signup) or redirects to the homepage if user is already logged in
+ *
+ * @requires Signup
+ * @requires Signin
+ * @requires RedirectToHomepage
+ *
+ * @param {Object} props Component props
+ * @param {boolean} props.loggedIn whether there is a user currently logged in or not
+ * @param {function} props.setUserData a function to set the user data object after receiving
+ * user info from the server
+ * @param {function} props.setLoggedIn a function to set logged in status to true after signing in
+ * successfully
+ *
+ */
 
 const Auth = (props) => {
   const { loggedIn, setLoggedIn, setUserData } = props;
@@ -49,4 +71,11 @@ const Auth = (props) => {
     </div>
   );
 };
+
+Auth.propTypes = {
+  loggedIn: PropTypes.bool.isRequired,
+  setLoggedIn: PropTypes.func.isRequired,
+  setUserData: PropTypes.func.isRequired,
+};
+
 export default Auth;

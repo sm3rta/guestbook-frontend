@@ -1,11 +1,40 @@
+/**
+ * @module Messages
+ */
 import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import "./index.css";
 import CircularLoading from "../../../common/CircularLoading";
-import moment from "moment";
 import Message from "./Message";
+import PropTypes from "prop-types";
 
 const apiEndpoint = process.env.REACT_APP_API_ENDPOINT;
+
+/**
+ * @method Messages
+ * @requires Message
+ * @desc Shows all the submitted messages
+ * @requires CircularLoading
+ * @param {Object} props Component props
+ * @param {boolean} props.loggedIn whether there is a user currently logged in or not
+ * @param {Object}  props.userData an object containing user data
+ * @param {string}  props.userData._id currently logged in user ID
+ * @param {string}  props.userData.name currently logged in user's name
+ * @param {boolean} messagesRefresh a flag set to true when this component should reload messages,
+ * set to true when a user submits a new message
+ * @param {function} setMessagesRefresh a function to set said flag to false after reloading messages
+ * @see Homepage
+ * @example
+ * return (
+ *   <Messages
+ *     messagesRefresh={false}
+ *     setMessagesRefresh={() => {}}
+ *     userData={{}}
+ *     loggedIn={true}
+ *   />
+ * );
+ *
+ */
 
 const Messages = (props) => {
   const [loading, setLoading] = useState(true);
@@ -87,5 +116,11 @@ const Messages = (props) => {
       )}
     </div>
   );
+};
+Messages.propTypes = {
+  loggedIn: PropTypes.bool.isRequired,
+  userData: PropTypes.object.isRequired,
+  messagesRefresh: PropTypes.bool,
+  setMessagesRefresh: PropTypes.func,
 };
 export default Messages;

@@ -5,11 +5,6 @@
   border-radius: 50%;
   border-color: whitesmoke transparent transparent;
   animation: spin 2s linear infinite;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
   margin: auto;
 }
 

@@ -72,20 +72,13 @@ const Message = (props) => {
     setEditedValue(message.content);
   }, [message.content]);
 
-  /**
-   * @method
-   * @name deleteMessage
-   * @inner
-   * @public
-   * @memberof Message
-   */
   const deleteMessage = useCallback(() => {
     const messageId = message._id;
 
     setLoading(true);
     axios
       .delete(apiEndpoint + `messages/${messageId}`)
-      .then((res) => {
+      .then(() => {
         setIsMessageShown(false);
         getMessages(false);
       })

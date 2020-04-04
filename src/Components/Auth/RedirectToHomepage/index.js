@@ -1,7 +1,17 @@
+/**
+ * @module RedirectToHomepage
+ */
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 
-const RedirectToHomepage = (props) => {
+/**
+ * @method
+ * @desc waits 2.5 seconds then redirects to the homepage\
+ * this is done to prevent the user from accessing the signin/signup pages
+ * while already logged in
+ * @see Auth
+ */
+const RedirectToHomepage = () => {
   const [redirect, setRedirect] = useState(false);
   useEffect(() => {
     const timer = setTimeout(() => {

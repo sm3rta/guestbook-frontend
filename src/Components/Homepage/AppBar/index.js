@@ -19,7 +19,7 @@ const AppBar = (props) => {
               onClick={() => {
                 setLoggedIn(false);
               }}
-              className="material-icons clear-icon"
+              className="material-icons icon"
             >
               exit_to_app
             </i>

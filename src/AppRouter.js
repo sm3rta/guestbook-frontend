@@ -1,8 +1,19 @@
+/**
+ * @module AppRouter
+ */
 import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Homepage from "./Components/Homepage";
 import Auth from "./Components/Auth";
 
+/**
+ * @method
+ * @desc this is the main app router, renders the appropriate component
+ * depending on the url
+ * @requires Homepage
+ * @requires Auth
+ *
+ */
 const AppRouter = () => {
   const [loggedIn, setLoggedIn] = useState(
     JSON.parse(localStorage.getItem("loggedIn")) || false

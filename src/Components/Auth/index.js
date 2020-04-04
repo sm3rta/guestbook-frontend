@@ -16,7 +16,7 @@ const Auth = (props) => {
     </div>
   ) : (
     <div className="auth-root">
-      <p className="text">Welcome to the guestbook</p>
+      <p className="text big">Welcome to the guestbook</p>
       <p className="text small">Please sign in or sign up</p>
       <div className="auth-container">
         <div className="form-container">

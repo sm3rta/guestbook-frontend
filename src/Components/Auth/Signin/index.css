@@ -1,0 +1,21 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 16px;
+}
+
+.label-text {
+  align-self: flex-start;
+  margin: 0;
+  font-size: x-small;
+}
+
+.sign-up-in-button {
+  font-size: smaller;
+}
+.sign-up-in-redirect {
+  font-size: x-small;
+}

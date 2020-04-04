@@ -1,13 +1,31 @@
+/**
+ * @module Signin
+ */
 import React, { useState, useCallback } from "react";
 import "./index.css";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import CircularLoading from "../../../common/CircularLoading";
+import PropTypes from "prop-types";
 
 const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()\\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 const apiEndpoint = process.env.REACT_APP_API_ENDPOINT;
 
+/**
+ * @method
+ * @desc shows a sign in form
+ * @see Auth
+ * @requires CircularLoading
+ *
+ *
+ * @param {Object} props Component props
+ * @param {function} props.setUserData a function to set the user data object after receiving
+ * user info from the server
+ * @param {function} props.setLoggedIn a function to set logged in status to true after signing in
+ * successfully
+ *
+ */
 const Signin = (props) => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
@@ -92,6 +110,11 @@ const Signin = (props) => {
       </p>
     </form>
   );
+};
+
+Signin.propTypes = {
+  setUserData: PropTypes.func.isRequired,
+  setLoggedIn: PropTypes.func.isRequired,
 };
 
 export default Signin;

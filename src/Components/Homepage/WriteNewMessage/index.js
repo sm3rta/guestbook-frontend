@@ -1,7 +1,6 @@
 import React, { useState, useCallback } from "react";
 import "./index.css";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
 
 const apiEndpoint = process.env.REACT_APP_API_ENDPOINT;
 
@@ -10,8 +9,7 @@ const WriteNewMessage = (props) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const history = useHistory();
-  const { loggedIn, userData } = props;
+  const { loggedIn, userData, setMessagesRefresh } = props;
 
   const submitMessage = useCallback(() => {
     setLoading(true);
@@ -44,9 +42,9 @@ const WriteNewMessage = (props) => {
       })
       .finally(() => {
         setLoading(false);
-        history.push("/?refresh=true");
+        setMessagesRefresh(true);
       });
-  }, [messageContent, userData._id, history]);
+  }, [messageContent, userData._id, setMessagesRefresh]);
 
   return (
     <div className="write-new-message">

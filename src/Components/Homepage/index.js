@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./index.css";
 
 import AppBar from "./AppBar";
@@ -7,6 +7,8 @@ import Messages from "./Messages";
 
 const Homepage = (props) => {
   const { loggedIn, setLoggedIn, userData } = props;
+  const [messagesRefresh, setMessagesRefresh] = useState(false);
+
   return (
     <main className="root">
       <AppBar
@@ -15,8 +17,17 @@ const Homepage = (props) => {
         setLoggedIn={setLoggedIn}
       />
       <div className="container">
-        <WriteNewMessage loggedIn={loggedIn} userData={userData} />
-        <Messages loggedIn={loggedIn} userData={userData} />
+        <WriteNewMessage
+          loggedIn={loggedIn}
+          userData={userData}
+          setMessagesRefresh={setMessagesRefresh}
+        />
+        <Messages
+          loggedIn={loggedIn}
+          userData={userData}
+          messagesRefresh={messagesRefresh}
+          setMessagesRefresh={setMessagesRefresh}
+        />
       </div>
     </main>
   );

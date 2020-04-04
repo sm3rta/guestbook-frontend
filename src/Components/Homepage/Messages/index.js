@@ -3,7 +3,6 @@ import axios from "axios";
 import "./index.css";
 import CircularLoading from "../../../common/CircularLoading";
 import moment from "moment";
-import { useLocation } from "react-router-dom";
 
 const apiEndpoint = process.env.REACT_APP_API_ENDPOINT;
 
@@ -14,8 +13,7 @@ const Messages = (props) => {
   const [replyValues, setReplyValues] = useState({});
   const [editedMessages, setEditedMessages] = useState([]);
 
-  const location = useLocation();
-  const { loggedIn, userData } = props;
+  const { loggedIn, userData, messagesRefresh, setMessagesRefresh } = props;
 
   const getMessages = useCallback((loading = true) => {
     setError(false);
@@ -47,10 +45,12 @@ const Messages = (props) => {
   }, []);
 
   useEffect(() => {
-    location.search === "?refresh=true" && getMessages();
-  }, [location, getMessages]);
+    messagesRefresh && getMessages();
+    setMessagesRefresh(false);
+  }, [getMessages, setMessagesRefresh, messagesRefresh]);
 
   useEffect(() => {
+    console.log("first effect triggered");
     getMessages();
   }, [getMessages]);
 

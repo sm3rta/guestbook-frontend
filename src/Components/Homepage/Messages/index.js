@@ -147,9 +147,29 @@ const Messages = (props) => {
                 <div key={messageIdx} className="message-container">
                   <div className="message-info-container">
                     <div className="message-submitter-content-date">
-                      <p className="message-submitter">
-                        {message.submittedBy.name}
-                      </p>
+                      <div className="message-info-container">
+                        <span className="message-submitter">
+                          {message.submittedBy.name}
+                        </span>
+                        {message.submittedBy._id === userData._id && loggedIn && (
+                          <span>
+                            <i
+                              onClick={() => {
+                                toggleEdit(messageIdx);
+                              }}
+                              className="material-icons icon"
+                            >
+                              create
+                            </i>
+                            <i
+                              onClick={() => deleteMessage(message._id)}
+                              className="material-icons icon"
+                            >
+                              clear
+                            </i>
+                          </span>
+                        )}
+                      </div>
                       {editedMessages[messageIdx].editable ? (
                         <div className="message-textarea-button-container">
                           <textarea
@@ -187,25 +207,6 @@ const Messages = (props) => {
                         {moment(message.date).fromNow()}
                       </p>
                     </div>
-
-                    {message.submittedBy._id === userData._id && loggedIn && (
-                      <div>
-                        <i
-                          onClick={() => {
-                            toggleEdit(messageIdx);
-                          }}
-                          className="material-icons icon"
-                        >
-                          create
-                        </i>
-                        <i
-                          onClick={() => deleteMessage(message._id)}
-                          className="material-icons icon"
-                        >
-                          clear
-                        </i>
-                      </div>
-                    )}
                   </div>
                   <div className="new-reply-container">
                     <form

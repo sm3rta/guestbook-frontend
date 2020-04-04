@@ -24,7 +24,7 @@
 }
 
 .message-submitter-content-date {
-  width: calc(100% - 50px);
+  width: 100%;
 }
 .message-textarea-button-container {
   width: 100%;

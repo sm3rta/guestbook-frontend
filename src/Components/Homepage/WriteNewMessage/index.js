@@ -1,8 +1,37 @@
+/**
+ * @module WriteNewMessage
+ */
 import React, { useState, useCallback } from "react";
 import "./index.css";
 import axios from "axios";
+import PropTypes from "prop-types";
 
 const apiEndpoint = process.env.REACT_APP_API_ENDPOINT;
+
+/**
+ * @method WriteNewMessage
+ * @desc  Component for posting a new message
+ * @param {Object} props Component props
+ * @param {boolean} props.loggedIn whether there is a user currently logged in or not
+ * @param {Object}  props.userData an object containing user data
+ * @param {string}  props.userData._id currently logged in user ID
+ * @param {string}  props.userData.name currently logged in user's name
+ * @param {function} setMessagesRefresh a function to set a flag to true for
+ * the {@link Messages} component to reload messages
+ *
+ * @see Messages
+ * @see Homepage
+ *
+ * @example
+ * return (
+ *   <WriteNewMessage
+ *     loggedIn={true}
+ *     userData={{ name, _id }}
+ *     setMessagesRefresh={() => {}}
+ *   />
+ * );
+ *
+ */
 
 const WriteNewMessage = (props) => {
   const [messageContent, setMessageContent] = useState("");
@@ -73,4 +102,11 @@ const WriteNewMessage = (props) => {
     </div>
   );
 };
+
+WriteNewMessage.propTypes = {
+  loggedIn: PropTypes.bool.isRequired,
+  userData: PropTypes.object.isRequired,
+  setMessagesRefresh: PropTypes.func,
+};
+
 export default WriteNewMessage;

@@ -21,7 +21,7 @@ input {
   height: 100%;
   width: 100%;
   resize: none;
-  border: 1px solid whitesmoke;
+  border: 1px solid #bfedffc2;
   margin: 4px 0;
   /* min-width: 200px; */
   /* margin-right: 2px; */

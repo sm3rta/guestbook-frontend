@@ -9,9 +9,7 @@
 
 .title-container {
   display: flex;
-  /* justify-content: center; */
   align-items: center;
-
   padding: 0 20px;
 }
 .title {
@@ -29,5 +27,12 @@
 @media (max-width: 600px) {
   .title {
     font-size: large;
+  }
+
+  .title-container {
+    padding: 0 5px;
+  }
+  .account-container {
+    padding: 0 5px;
   }
 }

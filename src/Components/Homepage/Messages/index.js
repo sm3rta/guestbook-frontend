@@ -158,12 +158,14 @@ const Messages = (props) => {
                                 toggleEdit(messageIdx);
                               }}
                               className="material-icons icon"
+                              title="Edit message"
                             >
                               create
                             </i>
                             <i
                               onClick={() => deleteMessage(message._id)}
                               className="material-icons icon"
+                              title="Delete message"
                             >
                               clear
                             </i>

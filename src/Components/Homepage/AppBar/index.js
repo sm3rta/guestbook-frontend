@@ -20,6 +20,7 @@ const AppBar = (props) => {
                 setLoggedIn(false);
               }}
               className="material-icons icon"
+              title="Log out"
             >
               exit_to_app
             </i>

@@ -1,5 +1,6 @@
-.root {
+.messages-root {
   display: flex;
+  min-height: 100px;
 }
 .messages-container {
   width: 100%;

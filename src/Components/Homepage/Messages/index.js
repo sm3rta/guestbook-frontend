@@ -104,7 +104,7 @@ const Messages = (props) => {
   );
 
   return (
-    <div className="root">
+    <div className="messages-root">
       {!loading ? (
         !error ? (
           // finished loading and fetched data successfully
@@ -194,7 +194,7 @@ const Messages = (props) => {
         )
       ) : (
         // loading
-        <CircularLoading size={100} />
+        <CircularLoading size={50} />
       )}
     </div>
   );

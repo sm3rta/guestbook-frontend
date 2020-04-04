@@ -22,6 +22,18 @@
   justify-content: space-between;
 }
 
+.message-submitter-content-date {
+  width: calc(100% - 50px);
+}
+.message-textarea-button-container {
+  width: 100%;
+}
+
+.message-edit-button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .message-submitter {
   font-weight: bold;
   font-size: medium;
@@ -41,7 +53,7 @@
   color: rgb(138, 138, 138);
 }
 
-.clear-icon {
+.icon {
   cursor: pointer;
 }
 

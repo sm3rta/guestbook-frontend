@@ -6,13 +6,13 @@ import moment from "moment";
 import { useLocation } from "react-router-dom";
 
 const apiEndpoint = process.env.REACT_APP_API_ENDPOINT;
-console.log("process.env", process.env);
 
 const Messages = (props) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [messages, setMessages] = useState([]);
   const [replyValues, setReplyValues] = useState({});
+  const [editedMessages, setEditedMessages] = useState([]);
 
   const location = useLocation();
   const { loggedIn, userData } = props;
@@ -28,6 +28,11 @@ const Messages = (props) => {
         res.data.data.messages.forEach((_message, messageIdx) => {
           replyValues[messageIdx] = { value: "", loading: false };
         });
+        const editedMessages = res.data.data.messages.map((message) => ({
+          value: message.content,
+          editable: false,
+        }));
+        setEditedMessages(editedMessages);
         setMessages(res.data.data.messages);
         setReplyValues(replyValues);
         setError(false);
@@ -103,6 +108,33 @@ const Messages = (props) => {
     [getMessages]
   );
 
+  const toggleEdit = (messageIdx) => {
+    const e = [...editedMessages];
+    e[messageIdx].editable = !e[messageIdx].editable;
+    e[messageIdx].value = messages[messageIdx].content;
+    setEditedMessages(e);
+  };
+
+  const submitMessageChanges = (messageIdx) => {
+    const messageId = messages[messageIdx]._id;
+    const newContent = editedMessages[messageIdx].value;
+
+    setLoading(true);
+    axios
+      .patch(apiEndpoint + `messages/${messageId}`, {
+        content: newContent,
+      })
+      .then((res) => {
+        console.log("message patch res", res);
+        toggleEdit(messageIdx);
+        // setLoading(false);
+        getMessages(false);
+      })
+      .catch((err) => {
+        console.log("message patch error", err);
+      });
+  };
+
   return (
     <div className="messages-root">
       {!loading ? (
@@ -114,23 +146,65 @@ const Messages = (props) => {
               {messages.map((message, messageIdx) => (
                 <div key={messageIdx} className="message-container">
                   <div className="message-info-container">
-                    <div>
+                    <div className="message-submitter-content-date">
                       <p className="message-submitter">
                         {message.submittedBy.name}
                       </p>
-                      <p className="message-content">{message.content}</p>
+                      {editedMessages[messageIdx].editable ? (
+                        <div className="message-textarea-button-container">
+                          <textarea
+                            className="new-message-textarea"
+                            rows={3}
+                            cols={20}
+                            onChange={(event) => {
+                              const e = [...editedMessages];
+                              e[messageIdx].value = event.target.value;
+                              setEditedMessages(e);
+                            }}
+                            value={editedMessages[messageIdx].value}
+                          />
+                          <div className="message-edit-button-container">
+                            <button
+                              onClick={() => {
+                                toggleEdit(messageIdx);
+                              }}
+                            >
+                              Cancel
+                            </button>
+                            <button
+                              onClick={() => {
+                                submitMessageChanges(messageIdx);
+                              }}
+                            >
+                              Update
+                            </button>
+                          </div>
+                        </div>
+                      ) : (
+                        <p className="message-content">{message.content}</p>
+                      )}
                       <p className="message-date">
                         {moment(message.date).fromNow()}
                       </p>
                     </div>
 
                     {message.submittedBy._id === userData._id && loggedIn && (
-                      <i
-                        onClick={() => deleteMessage(message._id)}
-                        className="material-icons clear-icon"
-                      >
-                        clear
-                      </i>
+                      <div>
+                        <i
+                          onClick={() => {
+                            toggleEdit(messageIdx);
+                          }}
+                          className="material-icons icon"
+                        >
+                          create
+                        </i>
+                        <i
+                          onClick={() => deleteMessage(message._id)}
+                          className="material-icons icon"
+                        >
+                          clear
+                        </i>
+                      </div>
                     )}
                   </div>
                   <div className="new-reply-container">

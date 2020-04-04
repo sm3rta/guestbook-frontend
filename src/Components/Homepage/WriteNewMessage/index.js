@@ -37,8 +37,10 @@ const WriteNewMessage = (props) => {
         setMessageContent("");
       })
       .catch((err) => {
-        console.log("post message err", err.response.data);
-        setError(err.response.data.message);
+        err.response && console.log("post message err", err.response.data);
+        err.response &&
+          err.response.data &&
+          setError(err.response.data.message);
       })
       .finally(() => {
         setLoading(false);

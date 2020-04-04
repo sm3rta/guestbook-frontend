@@ -29,12 +29,13 @@ const Message = (props) => {
       .delete(apiEndpoint + `messages/${messageId}`)
       .then((res) => {
         setIsMessageShown(false);
+        getMessages(false);
       })
       .catch(() => {})
       .finally(() => {
         setLoading(false);
       });
-  }, [message._id]);
+  }, [message._id, getMessages]);
 
   const submitMessageChanges = useCallback(() => {
     const messageId = message._id;

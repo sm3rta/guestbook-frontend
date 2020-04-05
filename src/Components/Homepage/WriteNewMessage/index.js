@@ -52,12 +52,12 @@ const WriteNewMessage = (props) => {
       setLoading(false);
       return;
     }
+    console.log("userData", userData);
     axios
       .post(
         apiEndpoint + "messages",
         {
           content: messageContent,
-          submittedBy: userData._id,
         },
         {
           headers: { "x-auth-token": userData.token },

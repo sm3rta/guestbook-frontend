@@ -124,7 +124,6 @@ const Message = (props) => {
         apiEndpoint + "replies",
         {
           content: replyContent,
-          submittedBy: userData._id,
           messageId: message._id,
         },
         {
@@ -138,6 +137,7 @@ const Message = (props) => {
       })
       .catch((error) => {
         console.log("post reply error", error);
+        console.log("post reply error.response", error.response);
       })
       .finally(() => {
         setIsReplyLoading(false);

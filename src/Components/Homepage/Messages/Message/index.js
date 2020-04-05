@@ -213,6 +213,7 @@ const Message = (props) => {
             }}
           >
             <input
+              autoComplete="on"
               className="new-reply-input"
               placeholder={
                 loggedIn ? "Write a reply..." : "Please login to reply"

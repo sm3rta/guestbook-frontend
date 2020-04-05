@@ -117,6 +117,7 @@ const Signup = (props) => {
       {/* name */}
       <p className="label-text">Name</p>
       <input
+        autoComplete="on"
         onChange={handleChange}
         value={formData.name}
         className="text-input"
@@ -127,6 +128,7 @@ const Signup = (props) => {
       {/* email */}
       <p className="label-text">Email</p>
       <input
+        autoComplete="on"
         onChange={handleChange}
         value={formData.email}
         className="text-input"
@@ -137,6 +139,7 @@ const Signup = (props) => {
       {/* password */}
       <p className="label-text">Password</p>
       <input
+        autoComplete="on"
         disabled={loading}
         onChange={handleChange}
         name="password"
@@ -148,6 +151,7 @@ const Signup = (props) => {
       {/* repeat password */}
       <p className="label-text">Repeat Password</p>
       <input
+        autoComplete="on"
         disabled={loading}
         onChange={handleChange}
         name="repeatPassword"

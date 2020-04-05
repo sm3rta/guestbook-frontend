@@ -83,6 +83,7 @@ const Signin = (props) => {
       <p className="error-text">{error}</p>
       <p className="label-text">Email</p>
       <input
+        autoComplete="on"
         onChange={handleChange}
         value={formData.email}
         className="text-input"
@@ -92,6 +93,7 @@ const Signin = (props) => {
       />
       <p className="label-text">Password</p>
       <input
+        autoComplete="on"
         disabled={loading}
         onChange={handleChange}
         name="password"

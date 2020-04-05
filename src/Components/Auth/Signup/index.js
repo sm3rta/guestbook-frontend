@@ -94,7 +94,9 @@ const Signup = (props) => {
         })
         .catch((err) => {
           err.response && console.log("signup post error", err.response.data);
-          setError(err.response.data.message);
+          if (err.response && err.response.data)
+            setError(err.response.data.message);
+          else setError("Network error, please try again");
         })
         .finally(() => {
           setLoading(false);

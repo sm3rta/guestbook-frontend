@@ -88,7 +88,7 @@ const Message = (props) => {
       .finally(() => {
         setLoading(false);
       });
-  }, [message._id, getMessages]);
+  }, [message._id, getMessages, userData.token]);
 
   const submitMessageChanges = useCallback(() => {
     const messageId = message._id;
@@ -115,7 +115,7 @@ const Message = (props) => {
       .finally(() => {
         setLoading(false);
       });
-  }, [editedValue, getMessages, message._id]);
+  }, [editedValue, getMessages, message._id, userData.token]);
 
   const submitReply = useCallback(() => {
     setIsReplyLoading(true);

@@ -77,7 +77,9 @@ const Message = (props) => {
 
     setLoading(true);
     axios
-      .delete(apiEndpoint + `messages/${messageId}`)
+      .delete(apiEndpoint + `messages/${messageId}`, {
+        headers: { "x-auth-token": userData.token },
+      })
       .then(() => {
         setIsMessageShown(false);
         getMessages(false);
@@ -93,9 +95,15 @@ const Message = (props) => {
 
     setLoading(true);
     axios
-      .patch(apiEndpoint + `messages/${messageId}`, {
-        content: editedValue,
-      })
+      .patch(
+        apiEndpoint + `messages/${messageId}`,
+        {
+          content: editedValue,
+        },
+        {
+          headers: { "x-auth-token": userData.token },
+        }
+      )
       .then((res) => {
         console.log("message patch res", res);
         setEdit((v) => !v);
@@ -112,11 +120,17 @@ const Message = (props) => {
   const submitReply = useCallback(() => {
     setIsReplyLoading(true);
     axios
-      .post(apiEndpoint + "replies", {
-        content: replyContent,
-        submittedBy: userData._id,
-        messageId: message._id,
-      })
+      .post(
+        apiEndpoint + "replies",
+        {
+          content: replyContent,
+          submittedBy: userData._id,
+          messageId: message._id,
+        },
+        {
+          headers: { "x-auth-token": userData.token },
+        }
+      )
       .then((res) => {
         console.log("post reply res", res);
         getMessages(false);
@@ -128,7 +142,7 @@ const Message = (props) => {
       .finally(() => {
         setIsReplyLoading(false);
       });
-  }, [getMessages, message._id, replyContent, userData._id]);
+  }, [getMessages, message._id, replyContent, userData]);
 
   return !loading ? (
     isMessageShown ? (
@@ -139,26 +153,28 @@ const Message = (props) => {
               <span className="message-submitter">
                 {message.submittedBy.name}
               </span>
-              {message.submittedBy._id === userData._id && loggedIn && (
-                <span>
-                  <i
-                    onClick={() => {
-                      setEdit(true);
-                    }}
-                    className="material-icons icon"
-                    title="Edit message"
-                  >
-                    create
-                  </i>
-                  <i
-                    onClick={() => deleteMessage(message._id)}
-                    className="material-icons icon"
-                    title="Delete message"
-                  >
-                    clear
-                  </i>
-                </span>
-              )}
+              {userData &&
+                message.submittedBy._id === userData._id &&
+                loggedIn && (
+                  <span>
+                    <i
+                      onClick={() => {
+                        setEdit(true);
+                      }}
+                      className="material-icons icon"
+                      title="Edit message"
+                    >
+                      create
+                    </i>
+                    <i
+                      onClick={() => deleteMessage(message._id)}
+                      className="material-icons icon"
+                      title="Delete message"
+                    >
+                      clear
+                    </i>
+                  </span>
+                )}
             </div>
             {edit ? (
               <div className="message-textarea-button-container">
@@ -226,7 +242,7 @@ const Message = (props) => {
 };
 
 Message.propTypes = {
-  userData: PropTypes.object.isRequired,
+  userData: PropTypes.object,
   message: PropTypes.object.isRequired,
   loggedIn: PropTypes.bool.isRequired,
   getMessages: PropTypes.func.isRequired,

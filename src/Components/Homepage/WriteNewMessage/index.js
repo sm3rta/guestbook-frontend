@@ -39,7 +39,6 @@ const WriteNewMessage = (props) => {
   const [error, setError] = useState("");
 
   const { loggedIn, userData, setMessagesRefresh } = props;
-
   const submitMessage = useCallback(() => {
     setLoading(true);
     setError("");
@@ -54,10 +53,16 @@ const WriteNewMessage = (props) => {
       return;
     }
     axios
-      .post(apiEndpoint + "messages", {
-        content: messageContent,
-        submittedBy: userData._id,
-      })
+      .post(
+        apiEndpoint + "messages",
+        {
+          content: messageContent,
+          submittedBy: userData._id,
+        },
+        {
+          headers: { "x-auth-token": userData.token },
+        }
+      )
       .then((res) => {
         console.log("post message res", res);
         setError(false);
@@ -73,7 +78,7 @@ const WriteNewMessage = (props) => {
         setLoading(false);
         setMessagesRefresh(true);
       });
-  }, [messageContent, userData._id, setMessagesRefresh]);
+  }, [messageContent, userData, setMessagesRefresh]);
 
   return (
     <div className="write-new-message">
@@ -105,7 +110,7 @@ const WriteNewMessage = (props) => {
 
 WriteNewMessage.propTypes = {
   loggedIn: PropTypes.bool.isRequired,
-  userData: PropTypes.object.isRequired,
+  userData: PropTypes.object,
   setMessagesRefresh: PropTypes.func,
 };
 

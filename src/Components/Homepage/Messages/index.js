@@ -47,7 +47,7 @@ const Messages = (props) => {
     setError(false);
     loading && setLoading(true);
     axios
-      .get(apiEndpoint + "messages")
+      .get(apiEndpoint + "get-messages")
       .then((res) => {
         console.log("res", res);
         const replyValues = {};
@@ -69,7 +69,7 @@ const Messages = (props) => {
   }, []);
 
   useEffect(() => {
-    messagesRefresh && getMessages();
+    messagesRefresh && getMessages(false);
     setMessagesRefresh(false);
   }, [getMessages, setMessagesRefresh, messagesRefresh]);
 
@@ -119,7 +119,7 @@ const Messages = (props) => {
 };
 Messages.propTypes = {
   loggedIn: PropTypes.bool.isRequired,
-  userData: PropTypes.object.isRequired,
+  userData: PropTypes.object,
   messagesRefresh: PropTypes.bool,
   setMessagesRefresh: PropTypes.func,
 };

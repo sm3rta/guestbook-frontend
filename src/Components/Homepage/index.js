@@ -61,7 +61,7 @@ const Homepage = (props) => {
 Homepage.propTypes = {
   loggedIn: PropTypes.bool.isRequired,
   setLoggedIn: PropTypes.func.isRequired,
-  userData: PropTypes.object.isRequired,
+  userData: PropTypes.object,
 };
 
 export default Homepage;

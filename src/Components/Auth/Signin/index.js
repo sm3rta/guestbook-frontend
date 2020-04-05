@@ -54,10 +54,12 @@ const Signin = (props) => {
         .post(apiEndpoint + "users/signin", formData)
         .then((res) => {
           console.log("signin post res", res);
-          setUserData(res.data.data);
+          console.log("signin post res.headers", res.headers);
+          const userData = { ...res.data.data };
+          userData.token = res.headers["x-auth-token"];
+          setUserData(userData);
           setLoggedIn(true);
-          localStorage.setItem("loggedIn", JSON.stringify(true));
-          localStorage.setItem("userData", JSON.stringify(res.data.data));
+          localStorage.setItem("userData", JSON.stringify(userData));
           history.push("/");
         })
         .catch((err) => {

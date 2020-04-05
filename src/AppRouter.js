@@ -15,12 +15,10 @@ import Auth from "./Components/Auth";
  *
  */
 const AppRouter = () => {
-  const [loggedIn, setLoggedIn] = useState(
-    JSON.parse(localStorage.getItem("loggedIn")) || false
-  );
   const [userData, setUserData] = useState(
-    JSON.parse(localStorage.getItem("userData")) || {}
+    JSON.parse(localStorage.getItem("userData")) || null
   );
+  const [loggedIn, setLoggedIn] = useState(userData ? true : false);
 
   return (
     <Router>

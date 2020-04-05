@@ -59,7 +59,7 @@ const AppBar = (props) => {
 
 AppBar.propTypes = {
   loggedIn: PropTypes.bool.isRequired,
-  userData: PropTypes.object.isRequired,
+  userData: PropTypes.object,
   setLoggedIn: PropTypes.func.isRequired,
 };
 

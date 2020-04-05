@@ -39,6 +39,8 @@ const AppBar = (props) => {
 
             <i
               onClick={() => {
+                localStorage.clear();
+                // setUserData(null);
                 setLoggedIn(false);
               }}
               className="material-icons icon"

@@ -9,14 +9,12 @@ To clone and install dependencies
 To start the application
 
 - Make sure the backend server is running: https://github.com/sm3rta/guestbook-backend
-- `yarn start` 
+- `yarn start`
 
 To generate the docs
 
 - `yarn docs`
 - Open /docs/index.html
-
-
 
 I used
 
@@ -26,9 +24,7 @@ I used
 - prop-types for validating component props
 - react-router-dom for routing
 
-
-
-I'm chosen a simplistic approach with a responsive design
+I've chosen a simplistic approach with a responsive design
 
 The web app mainly consists of 3 pages
 
